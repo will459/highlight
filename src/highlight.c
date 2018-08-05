@@ -23,7 +23,7 @@ int parse_args(int argc, char **argv){
 int main(int argc, char **argv) {
 
     if(argc < 2) {
-        fprintf(stderr, "Usage: highlight PATTERN [FILE] [OPTION]...\n");
+        fprintf(stderr, "Usage: highlight PATTERN [OPTION]...\n");
         return 1;
     }
 
