@@ -33,5 +33,9 @@ void colour_select(char *clr) {
     }
     else if(strcmp(clr, "WHITE") == 0) {
         colour = WHT;
+	}
+	else {
+		fprintf(stderr, "Error: Invalid colour. Highlighting will default to red.\n\n");
     }
 }
+
