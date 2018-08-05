@@ -37,7 +37,7 @@ int main(int argc, char **argv) {
 
     int ret = regcomp(&regex, argv[1], cflags);
     if(ret) {
-        fprintf(stderr, "Invalid Regular Expression.");
+        fprintf(stderr, "Invalid Regular Expression.\n");
         return 1;
     }
 
@@ -52,9 +52,12 @@ int main(int argc, char **argv) {
             strcat(temp, RESET);
             strcat(temp, buf+pmatch->rm_eo);
             printf(temp);
+            free(temp);
         }
         else {
             printf(buf);
         }
+        free(pmatch);
     }
+    free(buf);
 }
