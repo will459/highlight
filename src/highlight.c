@@ -43,21 +43,21 @@ int main(int argc, char **argv) {
 
     while(getLine(buf, MAX_LEN) == 0) {
         regmatch_t *pmatch = malloc(MAX_MATCHES * sizeof(regmatch_t));
-        ret = regexec(&regex, buf, MAX_MATCHES, pmatch, 0);
-        if(!ret) {
+        int cursor = 0;
+        while(!(ret = regexec(&regex, buf + cursor, MAX_MATCHES, pmatch, 0)))
+        {
             char *temp = calloc(MAX_LEN, sizeof(char));
-            strncpy(temp, buf, pmatch->rm_so);
+            strncpy(temp, buf + cursor, pmatch->rm_so);
             strcat(temp, colour);
-            strncat(temp, buf+pmatch->rm_so, pmatch->rm_eo - pmatch->rm_so);
+            strncat(temp, buf + cursor + pmatch->rm_so, pmatch->rm_eo - pmatch->rm_so);
             strcat(temp, RESET);
-            strcat(temp, buf+pmatch->rm_eo);
             printf(temp);
             free(temp);
+            cursor += pmatch->rm_eo;
         }
-        else {
-            printf(buf);
-        }
+        printf(buf + cursor);
         free(pmatch);
     }
     free(buf);
+    regfree(&regex);
 }

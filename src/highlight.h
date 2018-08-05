@@ -19,6 +19,6 @@
 #define B_WHT    "\x1B[47m"
 
 #define MAX_LEN 255
-#define MAX_MATCHES 10
+#define MAX_MATCHES 1
 
 #endif
