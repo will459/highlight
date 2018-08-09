@@ -2,6 +2,7 @@ IDIR =include
 ODIR=obj
 SDIR=src
 BDIR=bin
+INST_DIR=/usr/local/bin
 
 CC=gcc
 CFLAGS=-I$(IDIR)
@@ -18,7 +19,13 @@ $(ODIR)/%.o: $(SDIR)/%.c $(DEPS)
 hl: $(OBJ)
 	$(CC) -o $(BDIR)/$@ $^ $(CFLAGS) $(LIBS)
 
-.PHONY: clean
+.PHONY: clean install uninstall
 
 clean:
 	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ 
+
+install: hl
+	@cp $(BDIR)/hl $(INST_DIR)
+
+uninstall:
+	rm -f $(INST_DIR)/hl
