@@ -19,6 +19,10 @@ $(ODIR)/%.o: $(SDIR)/%.c $(DEPS)
 hl: $(OBJ)
 	$(CC) -o $(BDIR)/$@ $^ $(CFLAGS) $(LIBS)
 
+debug: CFLAGS += -ggdb
+debug: clean
+debug: hl
+
 .PHONY: clean install uninstall
 
 clean:
